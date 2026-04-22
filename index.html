@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0a0a12" />
+  <title>P&amp;L Arcade — Trading Meme Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1 class="logo">P&amp;L <span>ARCADE</span></h1>
+    <p class="tagline">Post your day. Pixel-perfect.</p>
+  </header>
+
+  <main class="app">
+    <section class="controls" aria-label="Controls">
+      <div class="field">
+        <label for="pnl-input">Daily P&amp;L</label>
+        <div class="pnl-row">
+          <div class="sign-toggle" role="group" aria-label="Profit or loss">
+            <button type="button" class="sign-btn active" data-sign="+">+ WIN</button>
+            <button type="button" class="sign-btn" data-sign="-">- LOSS</button>
+          </div>
+          <div class="amount-wrap">
+            <span class="currency">$</span>
+            <input id="pnl-input" type="text" inputmode="decimal" autocomplete="off"
+                   placeholder="0.00" value="1,337.42" />
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Pick a template</label>
+        <div id="gallery" class="gallery" role="listbox" aria-label="Template gallery"></div>
+      </div>
+
+      <div class="field preview-field">
+        <label>Preview</label>
+        <div class="canvas-wrap">
+          <canvas id="preview-canvas"></canvas>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="download-btn" class="primary">▼ DOWNLOAD PNG</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footbar">
+    <span>v1 · add more templates in <code>js/templates.js</code></span>
+  </footer>
+
+  <script src="js/templates.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
