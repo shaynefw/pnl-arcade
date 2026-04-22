@@ -38,10 +38,111 @@ body {
 }
 
 .topbar {
+  position: relative;
   padding: 20px 18px 8px;
   text-align: center;
   border-bottom: 2px solid var(--border);
   background: linear-gradient(180deg, #16162a 0%, transparent 100%);
+}
+
+.info-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-2);
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #000;
+  transition: transform 60ms linear, box-shadow 60ms linear;
+  padding: 0;
+  line-height: 1;
+}
+.info-btn:hover { background: var(--accent); color: #1a1200; }
+.info-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #000; }
+.info-btn:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+
+.modal[hidden] { display: none !important; }
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 12, 0.78);
+  backdrop-filter: blur(2px);
+}
+.modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: var(--panel);
+  border: 2px solid var(--accent);
+  box-shadow: 0 6px 0 #000, 0 0 0 4px var(--accent-2) inset;
+  padding: 22px 20px 18px;
+  color: var(--ink);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+.modal-card h2 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  color: var(--accent);
+  margin: 0 0 14px;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 0 #000;
+}
+.modal-close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 0;
+  color: var(--ink);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+}
+.modal-close:hover { color: var(--accent-2); }
+
+.howto {
+  margin: 0 0 12px;
+  padding-left: 22px;
+  font-size: 18px;
+  line-height: 1.35;
+}
+.howto li { margin-bottom: 10px; }
+.howto b { color: var(--accent); }
+.howto .kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+  vertical-align: 2px;
+  border: 2px solid var(--border);
+}
+.howto .kbd.win  { background: var(--win);  color: #001a0c; }
+.howto .kbd.loss { background: var(--loss); color: #1a0008; }
+.howto-tip {
+  margin: 6px 0 0;
+  font-size: 16px;
+  color: var(--ink-dim);
+  border-top: 2px dashed var(--border);
+  padding-top: 10px;
 }
 
 .logo {

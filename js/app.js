@@ -261,6 +261,30 @@
     document.body.removeChild(link);
   });
 
+  // --- Info modal --------------------------------------------------------
+
+  const infoBtn = document.getElementById('info-btn');
+  const infoModal = document.getElementById('info-modal');
+
+  function openInfo() {
+    infoModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+  function closeInfo() {
+    infoModal.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  if (infoBtn && infoModal) {
+    infoBtn.addEventListener('click', openInfo);
+    infoModal.addEventListener('click', (e) => {
+      if (e.target.dataset && e.target.dataset.close) closeInfo();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !infoModal.hidden) closeInfo();
+    });
+  }
+
   // --- Boot --------------------------------------------------------------
 
   const fontReady = (document.fonts && document.fonts.ready) || Promise.resolve();

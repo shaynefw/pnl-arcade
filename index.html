@@ -11,13 +11,37 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=3" />
+  <link rel="stylesheet" href="css/style.css?v=4" />
 </head>
 <body>
   <header class="topbar">
+    <button id="info-btn" class="info-btn" type="button"
+            aria-label="How to use" aria-haspopup="dialog">i</button>
     <h1 class="logo">P&amp;L <span>ARCADE</span></h1>
     <p class="tagline">Post your day. Pixel-perfect.</p>
   </header>
+
+  <div id="info-modal" class="modal" role="dialog" aria-modal="true"
+       aria-labelledby="info-title" hidden>
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-card">
+      <button class="modal-close" type="button" aria-label="Close"
+              data-close="1">×</button>
+      <h2 id="info-title">How to Play</h2>
+      <ol class="howto">
+        <li><b>Enter your P&amp;L.</b> Tap <span class="kbd win">+ WIN</span>
+            or <span class="kbd loss">- LOSS</span>, then type the amount.</li>
+        <li><b>Pick a template.</b> Scroll the gallery and tap any pixel-art
+            card.</li>
+        <li><b>Add banners (optional).</b> Tap one or more banners — numbers
+            show the stack order, tap again to remove.</li>
+        <li><b>Preview updates live</b> on the canvas.</li>
+        <li><b>Download PNG</b> and post it to your trading chat.</li>
+      </ol>
+      <p class="howto-tip">Tip: nothing leaves your device — no signup,
+        no upload. It's all rendered right in your browser.</p>
+    </div>
+  </div>
 
   <main class="app">
     <section class="controls" aria-label="Controls">
