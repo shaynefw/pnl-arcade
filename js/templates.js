@@ -45,6 +45,12 @@ window.BANNERS = [
     image: 'assets/pnl-banners/rapidfire-banner.png',
     thumb: 'assets/pnl-banners/rapidfire-banner.png',
   },
+  {
+    id: 'ghosteye',
+    name: 'GhostEye',
+    image: 'assets/pnl-banners/ghosteye-banner.png',
+    thumb: 'assets/pnl-banners/ghosteye-banner.png',
+  },
 ];
 
 // --- Template registry ---------------------------------------------------
@@ -142,6 +148,30 @@ window.TEMPLATES = [
       shadow: false,
       uppercase: false,
       maxWidth: 1200,
+    },
+  },
+  {
+    id: 'market-queen',
+    name: 'Market Queen',
+    image: 'assets/templates/win-pnl-06.jpg',
+    thumb: 'assets/templates/win-pnl-06.jpg',
+    text: {
+      // Dark banner y~1625..1920, centered at (1025, 1772) on 2048x2048.
+      // Bright neon green on near-black; no stroke needed, shadow adds depth.
+      x: 1025, y: 1772,
+      fontSize: 200,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center',
+      baseline: 'middle',
+      color: '#e6e6f0',
+      profitColor: '#00ff88',
+      lossColor:   '#ff3355',
+      stroke: null,
+      strokeWidth: 0,
+      prefix: '$',
+      shadow: true,
+      uppercase: false,
+      maxWidth: 1650,
     },
   },
   {
