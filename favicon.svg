@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" shape-rendering="crispEdges">
+  <!-- arcade cabinet background -->
+  <rect width="32" height="32" fill="#0a0a12"/>
+  <!-- neon yellow frame -->
+  <rect x="2" y="2" width="28" height="28" fill="none" stroke="#ffcc00" stroke-width="2"/>
+  <!-- corner pixels (arcade marquee feel) -->
+  <rect x="2"  y="2"  width="3" height="3" fill="#ff44bb"/>
+  <rect x="27" y="2"  width="3" height="3" fill="#ff44bb"/>
+  <rect x="2"  y="27" width="3" height="3" fill="#ff44bb"/>
+  <rect x="27" y="27" width="3" height="3" fill="#ff44bb"/>
+  <!-- big neon dollar sign -->
+  <text x="16" y="24"
+        font-family="'Courier New', ui-monospace, monospace"
+        font-size="22"
+        font-weight="900"
+        text-anchor="middle"
+        fill="#00ff88">$</text>
+</svg>
