@@ -65,6 +65,29 @@ const PLACEHOLDER_COIN = placeholderSVG({
 
 window.TEMPLATES = [
   {
+    id: 'winning-podium',
+    name: 'Winning Podium',
+    image: 'assets/templates/win-pnl-01.png',
+    thumb: 'assets/templates/win-pnl-01.png',
+    text: {
+      // Banner is 1673x288, centered at (1026, 1664) on a 2048x2048 canvas.
+      x: 1026, y: 1664,
+      fontSize: 220,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center',
+      baseline: 'middle',
+      color: '#0a0a14',
+      profitColor: '#0e4a22',   // dark forest green, reads on cream
+      lossColor:   '#7a0e1a',   // dark blood red
+      stroke: '#f5efcf',        // pale-cream outline blends into banner
+      strokeWidth: 6,
+      prefix: '$',
+      shadow: false,
+      uppercase: false,
+      maxWidth: 1500,
+    },
+  },
+  {
     id: 'street-trader',
     name: 'Street Trader',
     image: PLACEHOLDER_STREET,
