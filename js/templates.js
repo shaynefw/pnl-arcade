@@ -61,6 +61,35 @@ const PLACEHOLDER_COIN = placeholderSVG({
   title: 'COIN RUN', subtitle: 'BONUS STAGE',
 });
 
+// --- Banner registry -----------------------------------------------------
+// Banners are optional, pre-rendered graphics stacked below the P&L card.
+// Users can pick zero, one, or many (rendered in click order).
+// Banner image width is scaled up/down to match the template width.
+// To add a new banner:
+//   1. Drop the PNG into assets/pnl-banners/
+//   2. Add an entry below with { id, name, image, thumb }
+
+window.BANNERS = [
+  {
+    id: 'clearedge',
+    name: 'ClearEdge',
+    image: 'assets/pnl-banners/clearedge-banner.png',
+    thumb: 'assets/pnl-banners/clearedge-banner.png',
+  },
+  {
+    id: 'cosniper',
+    name: 'Co$niper',
+    image: 'assets/pnl-banners/cosniper-banner.png',
+    thumb: 'assets/pnl-banners/cosniper-banner.png',
+  },
+  {
+    id: 'rapidfire',
+    name: 'Rapidfire',
+    image: 'assets/pnl-banners/rapidfire-banner.png',
+    thumb: 'assets/pnl-banners/rapidfire-banner.png',
+  },
+];
+
 // --- Template registry ---------------------------------------------------
 
 window.TEMPLATES = [

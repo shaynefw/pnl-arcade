@@ -5,6 +5,7 @@
   const ctx = canvas.getContext('2d');
   const input = document.getElementById('pnl-input');
   const gallery = document.getElementById('gallery');
+  const bannerGallery = document.getElementById('banner-gallery');
   const downloadBtn = document.getElementById('download-btn');
   const signButtons = document.querySelectorAll('.sign-btn');
 
@@ -12,13 +13,21 @@
     sign: '+',
     raw: '1,337.42',
     templateId: window.TEMPLATES[0].id,
-    imageCache: new Map(), // id -> HTMLImageElement (loaded)
+    bannerIds: [],          // array of banner IDs, in click order
+    imageCache: new Map(),  // key: src URL → HTMLImageElement
   };
 
   // --- Helpers -----------------------------------------------------------
 
   function currentTemplate() {
     return window.TEMPLATES.find(t => t.id === state.templateId) || window.TEMPLATES[0];
+  }
+
+  function selectedBanners() {
+    const registry = window.BANNERS || [];
+    return state.bannerIds
+      .map(id => registry.find(b => b.id === id))
+      .filter(Boolean);
   }
 
   function parseAmount(str) {
@@ -44,16 +53,16 @@
     return full;
   }
 
-  function loadImage(tpl) {
-    if (state.imageCache.has(tpl.id)) {
-      return Promise.resolve(state.imageCache.get(tpl.id));
+  function loadImage(src) {
+    if (state.imageCache.has(src)) {
+      return Promise.resolve(state.imageCache.get(src));
     }
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.crossOrigin = 'anonymous';
-      img.onload = () => { state.imageCache.set(tpl.id, img); resolve(img); };
+      img.onload = () => { state.imageCache.set(src, img); resolve(img); };
       img.onerror = reject;
-      img.src = tpl.image;
+      img.src = src;
     });
   }
 
@@ -73,28 +82,50 @@
 
   async function render() {
     const tpl = currentTemplate();
-    let img;
+
+    let tplImg;
     try {
-      img = await loadImage(tpl);
+      tplImg = await loadImage(tpl.image);
     } catch (e) {
       console.error('Failed to load template image', tpl.id, e);
       return;
     }
 
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(img, 0, 0);
+    const banners = selectedBanners();
+    let bannerImgs = [];
+    try {
+      bannerImgs = await Promise.all(banners.map(b => loadImage(b.image)));
+    } catch (e) {
+      console.error('Failed to load banner image(s)', e);
+    }
 
+    // Final width matches template width; banners scale to match.
+    const W = tplImg.naturalWidth;
+    const tplH = tplImg.naturalHeight;
+    const bannerHeights = bannerImgs.map(img => {
+      const s = W / img.naturalWidth;
+      return Math.round(img.naturalHeight * s);
+    });
+    const totalBannerH = bannerHeights.reduce((a, b) => a + b, 0);
+    const H = tplH + totalBannerH;
+
+    canvas.width = W;
+    canvas.height = H;
+    ctx.clearRect(0, 0, W, H);
+
+    // 1. Template
+    ctx.drawImage(tplImg, 0, 0);
+
+    // 2. P&L text overlay
     const cfg = tpl.text || {};
     const text = buildPnlText(cfg);
     const baseColor = state.sign === '-'
       ? (cfg.lossColor || cfg.color || '#ff3355')
       : (cfg.profitColor || cfg.color || '#ffffff');
 
-    const size = fitFont(ctx, text, cfg.fontSize || 96,
-                         cfg.fontFamily || "'Press Start 2P', monospace",
-                         cfg.maxWidth);
+    fitFont(ctx, text, cfg.fontSize || 96,
+            cfg.fontFamily || "'Press Start 2P', monospace",
+            cfg.maxWidth);
 
     ctx.textAlign = cfg.align || 'center';
     ctx.textBaseline = cfg.baseline || 'middle';
@@ -102,7 +133,7 @@
     if (cfg.shadow) {
       ctx.save();
       ctx.fillStyle = 'rgba(0,0,0,0.55)';
-      ctx.fillText(text, (cfg.x || canvas.width / 2) + 8, (cfg.y || canvas.height / 2) + 8);
+      ctx.fillText(text, (cfg.x || W / 2) + 8, (cfg.y || tplH / 2) + 8);
       ctx.restore();
     }
 
@@ -111,16 +142,24 @@
       ctx.miterLimit = 2;
       ctx.strokeStyle = cfg.stroke;
       ctx.lineWidth = cfg.strokeWidth;
-      ctx.strokeText(text, cfg.x || canvas.width / 2, cfg.y || canvas.height / 2);
+      ctx.strokeText(text, cfg.x || W / 2, cfg.y || tplH / 2);
     }
 
     ctx.fillStyle = baseColor;
-    ctx.fillText(text, cfg.x || canvas.width / 2, cfg.y || canvas.height / 2);
+    ctx.fillText(text, cfg.x || W / 2, cfg.y || tplH / 2);
+
+    // 3. Banners stacked below, scaled to template width, in click order
+    let y = tplH;
+    bannerImgs.forEach((img, i) => {
+      const h = bannerHeights[i];
+      ctx.drawImage(img, 0, y, W, h);
+      y += h;
+    });
   }
 
-  // --- Gallery -----------------------------------------------------------
+  // --- Template gallery (single-select) ----------------------------------
 
-  function buildGallery() {
+  function buildTemplateGallery() {
     gallery.innerHTML = '';
     window.TEMPLATES.forEach(tpl => {
       const btn = document.createElement('button');
@@ -135,7 +174,7 @@
       `;
       btn.addEventListener('click', () => {
         state.templateId = tpl.id;
-        document.querySelectorAll('.thumb').forEach(el => {
+        document.querySelectorAll('#gallery .thumb').forEach(el => {
           const sel = el.dataset.id === tpl.id;
           el.classList.toggle('selected', sel);
           el.setAttribute('aria-selected', sel ? 'true' : 'false');
@@ -144,6 +183,45 @@
       });
       gallery.appendChild(btn);
     });
+  }
+
+  // --- Banner gallery (multi-select, preserves click order) --------------
+
+  function refreshBannerBadges() {
+    document.querySelectorAll('#banner-gallery .thumb').forEach(el => {
+      const idx = state.bannerIds.indexOf(el.dataset.id);
+      const sel = idx !== -1;
+      el.classList.toggle('selected', sel);
+      el.setAttribute('aria-selected', sel ? 'true' : 'false');
+      const badge = el.querySelector('.order-badge');
+      if (badge) badge.textContent = sel ? String(idx + 1) : '';
+    });
+  }
+
+  function buildBannerGallery() {
+    bannerGallery.innerHTML = '';
+    (window.BANNERS || []).forEach(bn => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'thumb';
+      btn.dataset.id = bn.id;
+      btn.setAttribute('role', 'option');
+      btn.setAttribute('aria-selected', 'false');
+      btn.innerHTML = `
+        <img src="${bn.thumb || bn.image}" alt="${bn.name}" loading="lazy" />
+        <span class="order-badge"></span>
+        <span class="thumb-name">${bn.name}</span>
+      `;
+      btn.addEventListener('click', () => {
+        const idx = state.bannerIds.indexOf(bn.id);
+        if (idx === -1) state.bannerIds.push(bn.id);
+        else state.bannerIds.splice(idx, 1);
+        refreshBannerBadges();
+        render();
+      });
+      bannerGallery.appendChild(btn);
+    });
+    refreshBannerBadges();
   }
 
   // --- Wiring ------------------------------------------------------------
@@ -174,8 +252,9 @@
     const tpl = currentTemplate();
     const n = parseAmount(state.raw);
     const safeAmt = (state.sign === '-' ? 'loss-' : 'win-') + formatAmount(n).replace(/[^0-9]/g, '_');
+    const bannerSuffix = state.bannerIds.length ? '-' + state.bannerIds.join('-') : '';
     const link = document.createElement('a');
-    link.download = `pnl-${tpl.id}-${safeAmt}.png`;
+    link.download = `pnl-${tpl.id}-${safeAmt}${bannerSuffix}.png`;
     link.href = canvas.toDataURL('image/png');
     document.body.appendChild(link);
     link.click();
@@ -184,9 +263,9 @@
 
   // --- Boot --------------------------------------------------------------
 
-  // Ensure Press Start 2P is available before first render so measurements are accurate.
   const fontReady = (document.fonts && document.fonts.ready) || Promise.resolve();
 
-  buildGallery();
+  buildTemplateGallery();
+  buildBannerGallery();
   fontReady.then(render);
 })();
