@@ -18,6 +18,46 @@
  *   3. Reload the page. That's it.
  */
 
+// --- Simple "scoreboard" templates ---------------------------------------
+// Clean arcade-style backdrops with no decorative title competing with
+// the P&L. Procedural SVG so they stay crisp at any size.
+
+function scoreboardSVG({ bg, neon, corner }) {
+  const svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080" shape-rendering="crispEdges">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect width="40" height="40" fill="${bg}"/>
+      <path d="M40 0 H0 V40" fill="none" stroke="${neon}" stroke-opacity="0.08" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#grid)"/>
+  <!-- outer frame -->
+  <rect x="40" y="40" width="1000" height="1000" fill="none" stroke="${neon}" stroke-width="6"/>
+  <rect x="56" y="56" width="968" height="968" fill="none" stroke="${neon}" stroke-opacity="0.3" stroke-width="2"/>
+  <!-- corner blocks (arcade marquee feel) -->
+  <rect x="40"   y="40"   width="48" height="48" fill="${corner}"/>
+  <rect x="992"  y="40"   width="48" height="48" fill="${corner}"/>
+  <rect x="40"   y="992"  width="48" height="48" fill="${corner}"/>
+  <rect x="992"  y="992"  width="48" height="48" fill="${corner}"/>
+  <!-- scoreboard plate behind the P&L -->
+  <rect x="120" y="380" width="840" height="320" fill="#000" fill-opacity="0.4" stroke="${neon}" stroke-opacity="0.4" stroke-width="2"/>
+  <!-- small header label -->
+  <g font-family="'Press Start 2P', monospace" text-anchor="middle" fill="${neon}" opacity="0.85">
+    <text x="540" y="175" font-size="28" letter-spacing="4">DAILY P&amp;L</text>
+  </g>
+  <!-- small footer tag -->
+  <g font-family="'Press Start 2P', monospace" text-anchor="middle" fill="${neon}" opacity="0.45">
+    <text x="540" y="940" font-size="16" letter-spacing="3">P&amp;L ARCADE</text>
+  </g>
+</svg>`;
+  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+}
+
+const SIMPLE_GREEN  = scoreboardSVG({ bg: '#0a1a14', neon: '#00ff88', corner: '#00ff88' });
+const SIMPLE_AMBER  = scoreboardSVG({ bg: '#1a1200', neon: '#ffaa00', corner: '#ffaa00' });
+const SIMPLE_MAGENTA = scoreboardSVG({ bg: '#14001a', neon: '#ff44bb', corner: '#ff44bb' });
+
 // --- Banner registry -----------------------------------------------------
 // Banners are optional, pre-rendered graphics stacked below the P&L card.
 // Users can pick zero, one, or many (rendered in click order).
@@ -172,6 +212,74 @@ window.TEMPLATES = [
       shadow: true,
       uppercase: false,
       maxWidth: 1650,
+    },
+  },
+  // --- Simple scoreboard templates (stay at the end for users who want
+  // a clean backdrop with no scene) -------------------------------------
+  {
+    id: 'simple-green',
+    name: 'Simple · Green',
+    image: SIMPLE_GREEN,
+    thumb: SIMPLE_GREEN,
+    text: {
+      x: 540, y: 540,
+      fontSize: 110,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center',
+      baseline: 'middle',
+      color: '#00ff88',
+      profitColor: '#00ff88',
+      lossColor:   '#ff3355',
+      stroke: '#001a0c',
+      strokeWidth: 8,
+      prefix: '$',
+      shadow: true,
+      uppercase: false,
+      maxWidth: 780,
+    },
+  },
+  {
+    id: 'simple-amber',
+    name: 'Simple · Amber',
+    image: SIMPLE_AMBER,
+    thumb: SIMPLE_AMBER,
+    text: {
+      x: 540, y: 540,
+      fontSize: 110,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center',
+      baseline: 'middle',
+      color: '#ffaa00',
+      profitColor: '#ffaa00',
+      lossColor:   '#ff3355',
+      stroke: '#1a1200',
+      strokeWidth: 8,
+      prefix: '$',
+      shadow: true,
+      uppercase: false,
+      maxWidth: 780,
+    },
+  },
+  {
+    id: 'simple-magenta',
+    name: 'Simple · Magenta',
+    image: SIMPLE_MAGENTA,
+    thumb: SIMPLE_MAGENTA,
+    text: {
+      x: 540, y: 540,
+      fontSize: 110,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center',
+      baseline: 'middle',
+      color: '#ff44bb',
+      profitColor: '#ff44bb',
+      lossColor:   '#ff3355',
+      stroke: '#1a0014',
+      strokeWidth: 8,
+      prefix: '$',
+      shadow: true,
+      uppercase: false,
+      maxWidth: 780,
     },
   },
   {
