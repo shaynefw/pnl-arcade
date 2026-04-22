@@ -210,12 +210,14 @@ body {
 }
 
 .banner-gallery {
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 8px;
 }
 .banner-gallery .thumb {
   aspect-ratio: 1080 / 250;
   width: 100%;
+  flex: 0 0 auto;
 }
 .banner-gallery .thumb img { object-fit: contain; background: #000; }
 .banner-gallery .thumb .thumb-name {
