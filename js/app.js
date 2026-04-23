@@ -26,6 +26,8 @@
     templateId: window.TEMPLATES[0].id,
     bannerIds: [],          // array of banner IDs, in click order
     imageCache: new Map(),  // key: src URL → HTMLImageElement
+    yOffsetPct: null,       // null = use template default; otherwise 0-100
+    fontSizePct: 100,       // percentage of template's fontSize
   };
 
   // --- Helpers -----------------------------------------------------------
@@ -134,17 +136,26 @@
       ? (cfg.lossColor || cfg.color || '#ff3355')
       : (cfg.profitColor || cfg.color || '#ffffff');
 
-    fitFont(ctx, text, cfg.fontSize || 96,
+    // Apply user slider overrides (position + font size).
+    const sizeMult = (state.fontSizePct || 100) / 100;
+    const baseFontSize = (cfg.fontSize || 96) * sizeMult;
+    const baseMaxWidth = cfg.maxWidth ? cfg.maxWidth * sizeMult : undefined;
+    fitFont(ctx, text, baseFontSize,
             cfg.fontFamily || "'Press Start 2P', monospace",
-            cfg.maxWidth);
+            baseMaxWidth);
 
     ctx.textAlign = cfg.align || 'center';
     ctx.textBaseline = cfg.baseline || 'middle';
 
+    const drawX = cfg.x || W / 2;
+    const drawY = state.yOffsetPct != null
+      ? (state.yOffsetPct / 100) * tplH
+      : (cfg.y || tplH / 2);
+
     if (cfg.shadow) {
       ctx.save();
       ctx.fillStyle = 'rgba(0,0,0,0.55)';
-      ctx.fillText(text, (cfg.x || W / 2) + 8, (cfg.y || tplH / 2) + 8);
+      ctx.fillText(text, drawX + 8, drawY + 8);
       ctx.restore();
     }
 
@@ -153,11 +164,11 @@
       ctx.miterLimit = 2;
       ctx.strokeStyle = cfg.stroke;
       ctx.lineWidth = cfg.strokeWidth;
-      ctx.strokeText(text, cfg.x || W / 2, cfg.y || tplH / 2);
+      ctx.strokeText(text, drawX, drawY);
     }
 
     ctx.fillStyle = baseColor;
-    ctx.fillText(text, cfg.x || W / 2, cfg.y || tplH / 2);
+    ctx.fillText(text, drawX, drawY);
 
     // 3. Banners stacked below, scaled to template width, in click order
     let y = tplH;
@@ -166,6 +177,14 @@
       ctx.drawImage(img, 0, y, W, h);
       y += h;
     });
+
+    // Sync the Y slider's position to the template default if the user
+    // hasn't touched it yet (now that real tplH is known). Inverted so
+    // thumb at top = text at top.
+    if (state.yOffsetPct == null && ySlider) {
+      const defaultYPct = Math.round(((cfg.y || tplH / 2) / tplH) * 100);
+      ySlider.value = String(100 - defaultYPct);
+    }
   }
 
   // --- Featured carousel (auto-rotating, selects on click) ---------------
@@ -242,6 +261,7 @@
         state.templateId = tpl.id;
         syncGallerySelection();
         updateCarouselSelectionState();
+        resetSliders();
         render();
         pauseThenResume();
       });
@@ -318,6 +338,7 @@
         state.templateId = tpl.id;
         syncGallerySelection();
         updateCarouselSelectionState();
+        resetSliders();
         render();
       });
       gallery.appendChild(btn);
@@ -399,6 +420,46 @@
     link.click();
     document.body.removeChild(link);
   });
+
+  // --- Position / size sliders -------------------------------------------
+
+  const ySlider = document.getElementById('y-slider');
+  const sizeSlider = document.getElementById('size-slider');
+  const sliderReset = document.getElementById('slider-reset');
+
+  function resetSliders() {
+    state.yOffsetPct = null;
+    state.fontSizePct = 100;
+    const tpl = currentTemplate();
+    const cfg = tpl.text || {};
+    // Initialize Y slider: thumb at top = text at top → inverted mapping.
+    const tplImg = state.imageCache.get(tpl.image);
+    const tplH = tplImg ? tplImg.naturalHeight : 2048;
+    const defaultYPct = Math.round(((cfg.y || tplH / 2) / tplH) * 100);
+    if (ySlider) ySlider.value = String(100 - defaultYPct);
+    if (sizeSlider) sizeSlider.value = '100';
+  }
+
+  if (ySlider) {
+    // Slider value 100 = thumb at top = text at top (yOffsetPct = 0).
+    // Slider value 0   = thumb at bottom = text at bottom (yOffsetPct = 100).
+    ySlider.addEventListener('input', (e) => {
+      state.yOffsetPct = 100 - parseInt(e.target.value, 10);
+      render();
+    });
+  }
+  if (sizeSlider) {
+    sizeSlider.addEventListener('input', (e) => {
+      state.fontSizePct = parseInt(e.target.value, 10);
+      render();
+    });
+  }
+  if (sliderReset) {
+    sliderReset.addEventListener('click', () => {
+      resetSliders();
+      render();
+    });
+  }
 
   // --- Info modal --------------------------------------------------------
 

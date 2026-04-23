@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=6" />
+  <link rel="stylesheet" href="css/style.css?v=7" />
 </head>
 <body>
   <header class="topbar">
@@ -92,9 +92,25 @@
       </div>
 
       <div class="field preview-field">
-        <label>Preview</label>
-        <div class="canvas-wrap">
-          <canvas id="preview-canvas"></canvas>
+        <label>
+          Preview
+          <span class="label-hint">slide to move · resize</span>
+        </label>
+        <div class="canvas-with-sliders">
+          <input type="range" id="y-slider" class="y-slider"
+                 min="0" max="100" step="1" value="50"
+                 aria-label="P&amp;L vertical position" />
+          <div class="canvas-wrap">
+            <canvas id="preview-canvas"></canvas>
+          </div>
+        </div>
+        <div class="slider-row">
+          <span class="slider-cap">SIZE</span>
+          <input type="range" id="size-slider" class="size-slider"
+                 min="40" max="200" step="5" value="100"
+                 aria-label="P&amp;L font size" />
+          <button type="button" id="slider-reset" class="slider-reset"
+                  aria-label="Reset position and size">RESET</button>
         </div>
       </div>
 
