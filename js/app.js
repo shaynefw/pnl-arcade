@@ -13,7 +13,8 @@
   const carouselPrev = document.querySelector('#carousel .carousel-nav.prev');
   const carouselNext = document.querySelector('#carousel .carousel-nav.next');
 
-  const FEATURED_COUNT = 7;
+  const FEATURED_COUNT = 9;
+  const CAROUSEL_VISIBLE = 3;
   const CAROUSEL_INTERVAL_MS = 4500;
   const SKIP_FROM_FEATURED = new Set([
     'simple-green', 'simple-amber', 'simple-magenta', 'robot-crusher',
@@ -181,6 +182,7 @@
 
   function updateCarouselSelectionState() {
     if (!carouselTrack) return;
+    // Every rendered card (real + clone) with matching id gets highlighted.
     [...carouselTrack.children].forEach(el => {
       el.classList.toggle('is-selected', el.dataset.id === state.templateId);
     });
@@ -191,9 +193,8 @@
     const items = featuredTemplates();
     if (!items.length) return;
     carouselIdx = ((i % items.length) + items.length) % items.length;
-    [...carouselTrack.children].forEach((el, j) => {
-      el.classList.toggle('active', j === carouselIdx);
-    });
+    const slidePct = 100 / CAROUSEL_VISIBLE;
+    carouselTrack.style.transform = `translateX(-${carouselIdx * slidePct}%)`;
     if (carouselDots) {
       [...carouselDots.children].forEach((el, j) => {
         el.classList.toggle('active', j === carouselIdx);
@@ -205,7 +206,7 @@
   function startCarouselRotate() {
     stopCarouselRotate();
     const items = featuredTemplates();
-    if (items.length <= 1) return;
+    if (items.length <= CAROUSEL_VISIBLE) return;
     carouselTimer = setInterval(() => {
       showCarouselSlide(carouselIdx + 1);
     }, CAROUSEL_INTERVAL_MS);
@@ -215,14 +216,22 @@
     if (carouselTimer) { clearInterval(carouselTimer); carouselTimer = null; }
   }
 
+  function pauseThenResume() {
+    stopCarouselRotate();
+    setTimeout(startCarouselRotate, 8000);
+  }
+
   function buildCarousel() {
     if (!carouselTrack) return;
     const items = featuredTemplates();
     carouselTrack.innerHTML = '';
-    items.forEach((tpl, i) => {
+    // Duplicate the first CAROUSEL_VISIBLE items at the end so the slide
+    // can advance past the last "real" index and wrap smoothly.
+    const rendered = items.concat(items.slice(0, CAROUSEL_VISIBLE));
+    rendered.forEach((tpl) => {
       const slide = document.createElement('button');
       slide.type = 'button';
-      slide.className = 'carousel-slide' + (i === 0 ? ' active' : '');
+      slide.className = 'carousel-slide';
       slide.dataset.id = tpl.id;
       slide.setAttribute('aria-label', 'Select ' + tpl.name);
       slide.innerHTML = `
@@ -234,11 +243,23 @@
         syncGallerySelection();
         updateCarouselSelectionState();
         render();
-        // Briefly pause rotation after user interaction
-        stopCarouselRotate();
-        setTimeout(startCarouselRotate, 8000);
+        pauseThenResume();
       });
       carouselTrack.appendChild(slide);
+    });
+
+    // When the transform advances into the duplicated clone region, snap
+    // silently back to the matching real position.
+    carouselTrack.addEventListener('transitionend', () => {
+      if (carouselIdx >= items.length) {
+        carouselTrack.style.transition = 'none';
+        carouselIdx = carouselIdx - items.length;
+        const slidePct = 100 / CAROUSEL_VISIBLE;
+        carouselTrack.style.transform = `translateX(-${carouselIdx * slidePct}%)`;
+        // Force reflow then restore transition for next tick.
+        void carouselTrack.offsetWidth;
+        carouselTrack.style.transition = '';
+      }
     });
 
     if (carouselDots) {
@@ -252,8 +273,7 @@
         dot.setAttribute('aria-label', 'Slide ' + (i + 1));
         dot.addEventListener('click', () => {
           showCarouselSlide(i);
-          stopCarouselRotate();
-          setTimeout(startCarouselRotate, 8000);
+          pauseThenResume();
         });
         carouselDots.appendChild(dot);
       });
@@ -261,13 +281,11 @@
 
     if (carouselPrev) carouselPrev.addEventListener('click', () => {
       showCarouselSlide(carouselIdx - 1);
-      stopCarouselRotate();
-      setTimeout(startCarouselRotate, 8000);
+      pauseThenResume();
     });
     if (carouselNext) carouselNext.addEventListener('click', () => {
       showCarouselSlide(carouselIdx + 1);
-      stopCarouselRotate();
-      setTimeout(startCarouselRotate, 8000);
+      pauseThenResume();
     });
 
     updateCarouselSelectionState();
