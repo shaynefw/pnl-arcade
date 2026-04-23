@@ -8,6 +8,16 @@
   const bannerGallery = document.getElementById('banner-gallery');
   const downloadBtn = document.getElementById('download-btn');
   const signButtons = document.querySelectorAll('.sign-btn');
+  const carouselTrack = document.getElementById('carousel-track');
+  const carouselDots = document.getElementById('carousel-dots');
+  const carouselPrev = document.querySelector('#carousel .carousel-nav.prev');
+  const carouselNext = document.querySelector('#carousel .carousel-nav.next');
+
+  const FEATURED_COUNT = 7;
+  const CAROUSEL_INTERVAL_MS = 4500;
+  const SKIP_FROM_FEATURED = new Set([
+    'simple-green', 'simple-amber', 'simple-magenta', 'robot-crusher',
+  ]);
 
   const state = {
     sign: '+',
@@ -157,6 +167,120 @@
     });
   }
 
+  // --- Featured carousel (auto-rotating, selects on click) ---------------
+
+  let carouselIdx = 0;
+  let carouselTimer = null;
+
+  function featuredTemplates() {
+    const all = window.TEMPLATES || [];
+    return all
+      .filter(t => !SKIP_FROM_FEATURED.has(t.id))
+      .slice(-FEATURED_COUNT);
+  }
+
+  function updateCarouselSelectionState() {
+    if (!carouselTrack) return;
+    [...carouselTrack.children].forEach(el => {
+      el.classList.toggle('is-selected', el.dataset.id === state.templateId);
+    });
+  }
+
+  function showCarouselSlide(i) {
+    if (!carouselTrack) return;
+    const items = featuredTemplates();
+    if (!items.length) return;
+    carouselIdx = ((i % items.length) + items.length) % items.length;
+    [...carouselTrack.children].forEach((el, j) => {
+      el.classList.toggle('active', j === carouselIdx);
+    });
+    if (carouselDots) {
+      [...carouselDots.children].forEach((el, j) => {
+        el.classList.toggle('active', j === carouselIdx);
+        el.setAttribute('aria-selected', j === carouselIdx ? 'true' : 'false');
+      });
+    }
+  }
+
+  function startCarouselRotate() {
+    stopCarouselRotate();
+    const items = featuredTemplates();
+    if (items.length <= 1) return;
+    carouselTimer = setInterval(() => {
+      showCarouselSlide(carouselIdx + 1);
+    }, CAROUSEL_INTERVAL_MS);
+  }
+
+  function stopCarouselRotate() {
+    if (carouselTimer) { clearInterval(carouselTimer); carouselTimer = null; }
+  }
+
+  function buildCarousel() {
+    if (!carouselTrack) return;
+    const items = featuredTemplates();
+    carouselTrack.innerHTML = '';
+    items.forEach((tpl, i) => {
+      const slide = document.createElement('button');
+      slide.type = 'button';
+      slide.className = 'carousel-slide' + (i === 0 ? ' active' : '');
+      slide.dataset.id = tpl.id;
+      slide.setAttribute('aria-label', 'Select ' + tpl.name);
+      slide.innerHTML = `
+        <img src="${tpl.thumb || tpl.image}" alt="${tpl.name}" loading="lazy" />
+        <span class="carousel-title">${tpl.name}</span>
+      `;
+      slide.addEventListener('click', () => {
+        state.templateId = tpl.id;
+        syncGallerySelection();
+        updateCarouselSelectionState();
+        render();
+        // Briefly pause rotation after user interaction
+        stopCarouselRotate();
+        setTimeout(startCarouselRotate, 8000);
+      });
+      carouselTrack.appendChild(slide);
+    });
+
+    if (carouselDots) {
+      carouselDots.innerHTML = '';
+      items.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.dataset.idx = String(i);
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+        dot.addEventListener('click', () => {
+          showCarouselSlide(i);
+          stopCarouselRotate();
+          setTimeout(startCarouselRotate, 8000);
+        });
+        carouselDots.appendChild(dot);
+      });
+    }
+
+    if (carouselPrev) carouselPrev.addEventListener('click', () => {
+      showCarouselSlide(carouselIdx - 1);
+      stopCarouselRotate();
+      setTimeout(startCarouselRotate, 8000);
+    });
+    if (carouselNext) carouselNext.addEventListener('click', () => {
+      showCarouselSlide(carouselIdx + 1);
+      stopCarouselRotate();
+      setTimeout(startCarouselRotate, 8000);
+    });
+
+    updateCarouselSelectionState();
+  }
+
+  function syncGallerySelection() {
+    document.querySelectorAll('#gallery .thumb').forEach(el => {
+      const sel = el.dataset.id === state.templateId;
+      el.classList.toggle('selected', sel);
+      el.setAttribute('aria-selected', sel ? 'true' : 'false');
+    });
+  }
+
   // --- Template gallery (single-select) ----------------------------------
 
   function buildTemplateGallery() {
@@ -174,11 +298,8 @@
       `;
       btn.addEventListener('click', () => {
         state.templateId = tpl.id;
-        document.querySelectorAll('#gallery .thumb').forEach(el => {
-          const sel = el.dataset.id === tpl.id;
-          el.classList.toggle('selected', sel);
-          el.setAttribute('aria-selected', sel ? 'true' : 'false');
-        });
+        syncGallerySelection();
+        updateCarouselSelectionState();
         render();
       });
       gallery.appendChild(btn);
@@ -291,5 +412,7 @@
 
   buildTemplateGallery();
   buildBannerGallery();
+  buildCarousel();
+  startCarouselRotate();
   fontReady.then(render);
 })();

@@ -416,6 +416,198 @@ window.TEMPLATES = [
       maxWidth: 1750,
     },
   },
+  {
+    id: 'neon-operator',
+    name: 'Neon Operator',
+    image: 'assets/templates/win-pnl-18.jpg',
+    thumb: 'assets/templates/win-pnl-18.jpg',
+    text: {
+      x: 1024, y: 150, fontSize: 120,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ffcc', profitColor: '#00ffcc', lossColor: '#ff3355',
+      stroke: '#000000', strokeWidth: 12,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1700,
+    },
+  },
+  {
+    id: 'super-bull',
+    name: 'Super Bull',
+    image: 'assets/templates/win-pnl-19.png',
+    thumb: 'assets/templates/win-pnl-19.png',
+    text: {
+      x: 1024, y: 150, fontSize: 120,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff3355',
+      stroke: '#000000', strokeWidth: 12,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1700,
+    },
+  },
+  {
+    id: 'fist-of-finance',
+    name: 'Fist of Finance',
+    image: 'assets/templates/win-pnl-20.png',
+    thumb: 'assets/templates/win-pnl-20.png',
+    text: {
+      // Dark banner strip y~1760..2047, center ~1900
+      x: 1024, y: 1900, fontSize: 180,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffffff', profitColor: '#00ff88', lossColor: '#ff3355',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1750,
+    },
+  },
+  {
+    id: 'judgment-day',
+    name: 'Judgment Day',
+    image: 'assets/templates/win-pnl-21.png',
+    thumb: 'assets/templates/win-pnl-21.png',
+    text: {
+      // Dark banner strip y~1775..1975, center ~1875
+      x: 1024, y: 1880, fontSize: 170,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ff3355', profitColor: '#ff88aa', lossColor: '#ff3355',
+      stroke: '#000000', strokeWidth: 6,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1750,
+    },
+  },
+  {
+    id: 'slam-dunk',
+    name: 'Slam Dunk',
+    image: 'assets/templates/win-pnl-22.png',
+    thumb: 'assets/templates/win-pnl-22.png',
+    text: {
+      // Dark banner strip at very bottom y~1920..2047
+      x: 1024, y: 1970, fontSize: 140,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff3355',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1900,
+    },
+  },
+  {
+    id: 'breakaway',
+    name: 'Breakaway',
+    image: 'assets/templates/win-pnl-23.png',
+    thumb: 'assets/templates/win-pnl-23.png',
+    text: {
+      // Dark banner strip y~1820..2000
+      x: 1024, y: 1910, fontSize: 170,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffffff', profitColor: '#00ff88', lossColor: '#ff3355',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'all-seeing-eye',
+    name: 'All-Seeing Eye',
+    image: 'assets/templates/win-pnl-24.png',
+    thumb: 'assets/templates/win-pnl-24.png',
+    text: {
+      // Dark banner strip y~1840..2000
+      x: 1024, y: 1930, fontSize: 160,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ff4466', profitColor: '#ff88aa', lossColor: '#ff3355',
+      stroke: '#000000', strokeWidth: 4,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1750,
+    },
+  },
+  {
+    id: 'market-mayhem',
+    name: 'Market Mayhem',
+    image: 'assets/templates/win-pnl-25.png',
+    thumb: 'assets/templates/win-pnl-25.png',
+    text: {
+      // Dark banner strip y~1740..2047
+      x: 1024, y: 1900, fontSize: 200,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffffff', profitColor: '#00ff88', lossColor: '#ff3355',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'shadow-broker',
+    name: 'Shadow Broker',
+    image: 'assets/templates/win-pnl-26.png',
+    thumb: 'assets/templates/win-pnl-26.png',
+    text: {
+      // Empty display frame y~1640..1940, center ~1790
+      x: 1024, y: 1810, fontSize: 170,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ffff', profitColor: '#00ffff', lossColor: '#ff6688',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1600,
+    },
+  },
+  {
+    id: 'wonder-trader',
+    name: 'Wonder Trader',
+    image: 'assets/templates/win-pnl-27.png',
+    thumb: 'assets/templates/win-pnl-27.png',
+    text: {
+      // Dark banner strip y~1820..2000
+      x: 1024, y: 1900, fontSize: 170,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff3355',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1750,
+    },
+  },
+  {
+    id: 'mech-markets',
+    name: 'Mech Markets',
+    image: 'assets/templates/win-pnl-28.png',
+    thumb: 'assets/templates/win-pnl-28.png',
+    text: {
+      // Dark banner strip y~1920..2047
+      x: 1024, y: 1975, fontSize: 140,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ffff', profitColor: '#00ff88', lossColor: '#ff3355',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1900,
+    },
+  },
+  {
+    id: 'halo-mode',
+    name: 'Halo Mode',
+    image: 'assets/templates/win-pnl-29.png',
+    thumb: 'assets/templates/win-pnl-29.png',
+    text: {
+      x: 1024, y: 150, fontSize: 120,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ff88', profitColor: '#00ff88', lossColor: '#ff3355',
+      stroke: '#000000', strokeWidth: 12,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1600,
+    },
+  },
+  {
+    id: 'zen-master',
+    name: 'Zen Master',
+    image: 'assets/templates/win-pnl-30.png',
+    thumb: 'assets/templates/win-pnl-30.png',
+    text: {
+      // Dark banner strip y~1540..2000
+      x: 1024, y: 1850, fontSize: 210,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ffff', profitColor: '#00ffff', lossColor: '#ff6688',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1800,
+    },
+  },
   // --- Simple scoreboard templates (stay at the end for users who want
   // a clean backdrop with no scene) -------------------------------------
   {
