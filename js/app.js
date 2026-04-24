@@ -407,18 +407,40 @@
     });
   });
 
+  const downloadToast = document.getElementById('download-toast');
+  let toastHideTimer = null;
+  let toastFinalizeTimer = null;
+  function showDownloadToast(filename) {
+    if (!downloadToast) return;
+    const sub = downloadToast.querySelector('.toast-sub');
+    if (sub) sub.textContent = filename ? `Saved ${filename}` : 'Check your Downloads folder';
+    downloadToast.hidden = false;
+    // Force reflow so the transition plays on each show
+    // eslint-disable-next-line no-unused-expressions
+    downloadToast.offsetWidth;
+    downloadToast.classList.add('is-visible');
+    if (toastHideTimer) clearTimeout(toastHideTimer);
+    if (toastFinalizeTimer) clearTimeout(toastFinalizeTimer);
+    toastHideTimer = setTimeout(() => {
+      downloadToast.classList.remove('is-visible');
+      toastFinalizeTimer = setTimeout(() => { downloadToast.hidden = true; }, 260);
+    }, 2200);
+  }
+
   downloadBtn.addEventListener('click', async () => {
     await render();
     const tpl = currentTemplate();
     const n = parseAmount(state.raw);
     const safeAmt = (state.sign === '-' ? 'loss-' : 'win-') + formatAmount(n).replace(/[^0-9]/g, '_');
     const bannerSuffix = state.bannerIds.length ? '-' + state.bannerIds.join('-') : '';
+    const filename = `pnl-${tpl.id}-${safeAmt}${bannerSuffix}.png`;
     const link = document.createElement('a');
-    link.download = `pnl-${tpl.id}-${safeAmt}${bannerSuffix}.png`;
+    link.download = filename;
     link.href = canvas.toDataURL('image/png');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    showDownloadToast(filename);
   });
 
   // --- Position / size sliders -------------------------------------------
