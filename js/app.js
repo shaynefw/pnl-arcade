@@ -424,7 +424,7 @@
     toastHideTimer = setTimeout(() => {
       downloadToast.classList.remove('is-visible');
       toastFinalizeTimer = setTimeout(() => { downloadToast.hidden = true; }, 260);
-    }, 4400);
+    }, 7700);
   }
 
   downloadBtn.addEventListener('click', async () => {
