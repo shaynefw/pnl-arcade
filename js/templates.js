@@ -614,6 +614,156 @@ window.TEMPLATES = [
       prefix: '$', shadow: true, uppercase: false, maxWidth: 1800,
     },
   },
+  {
+    id: 'race-day',
+    name: 'Race Day',
+    image: 'assets/templates/win-pnl-31.png',
+    thumb: 'assets/templates/win-pnl-31.png',
+    text: {
+      // Wide black bar along the very bottom (~y 1760..2048)
+      x: 1024, y: 1905, fontSize: 170,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: '#000000', strokeWidth: 8,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'viking-raider',
+    name: 'Viking Raider',
+    image: 'assets/templates/win-pnl-32.png',
+    thumb: 'assets/templates/win-pnl-32.png',
+    text: {
+      // No natural banner — float text high over stormy sky at top
+      x: 1024, y: 180, fontSize: 120,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: '#000000', strokeWidth: 14,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1700,
+    },
+  },
+  {
+    id: 'shadow-assassin',
+    name: 'Shadow Assassin',
+    image: 'assets/templates/win-pnl-33.png',
+    thumb: 'assets/templates/win-pnl-33.png',
+    text: {
+      // Solid black banner strip along the bottom (~y 1820..2048)
+      x: 1024, y: 1930, fontSize: 150,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'dragon-kick',
+    name: 'Dragon Kick',
+    image: 'assets/templates/win-pnl-34.png',
+    thumb: 'assets/templates/win-pnl-34.png',
+    text: {
+      // Black banner strip along the bottom (~y 1780..2000)
+      x: 1024, y: 1890, fontSize: 170,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ffff', profitColor: '#00ff88', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'code-agent',
+    name: 'Code Agent',
+    image: 'assets/templates/win-pnl-35.png',
+    thumb: 'assets/templates/win-pnl-35.png',
+    text: {
+      // Top black strip — overlay headline
+      x: 1024, y: 170, fontSize: 120,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ff88', profitColor: '#00ff88', lossColor: '#ff8899',
+      stroke: '#000000', strokeWidth: 12,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1700,
+    },
+  },
+  {
+    id: 'commander',
+    name: 'Commander',
+    image: 'assets/templates/win-pnl-36.png',
+    thumb: 'assets/templates/win-pnl-36.png',
+    text: {
+      // Big black bar at the bottom (~y 1600..2048)
+      x: 1024, y: 1820, fontSize: 220,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ff88', profitColor: '#00ff88', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'dark-paladin',
+    name: 'Dark Paladin',
+    image: 'assets/templates/win-pnl-37.png',
+    thumb: 'assets/templates/win-pnl-37.png',
+    text: {
+      // Black banner strip along the bottom (~y 1820..2020)
+      x: 1024, y: 1920, fontSize: 150,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'cockpit-crew',
+    name: 'Cockpit Crew',
+    image: 'assets/templates/win-pnl-38.png',
+    thumb: 'assets/templates/win-pnl-38.png',
+    text: {
+      // No banner — overlay at top center under the HUD
+      x: 1024, y: 180, fontSize: 120,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ffff', profitColor: '#00ff88', lossColor: '#ff8899',
+      stroke: '#000000', strokeWidth: 14,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1400,
+    },
+  },
+  {
+    id: 'hadouken',
+    name: 'Hadouken',
+    image: 'assets/templates/win-pnl-39.png',
+    thumb: 'assets/templates/win-pnl-39.png',
+    text: {
+      // Huge black area at the bottom (~y 1500..2048)
+      x: 1024, y: 1790, fontSize: 220,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'spec-ops',
+    name: 'Spec Ops',
+    image: 'assets/templates/win-pnl-40.png',
+    thumb: 'assets/templates/win-pnl-40.png',
+    text: {
+      // Black banner strip along the bottom (~y 1760..2010)
+      x: 1024, y: 1880, fontSize: 180,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ff88', profitColor: '#00ff88', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
   // --- Simple scoreboard templates (stay at the end for users who want
   // a clean backdrop with no scene) -------------------------------------
   {
