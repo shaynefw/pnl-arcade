@@ -764,6 +764,321 @@ window.TEMPLATES = [
       prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
     },
   },
+  {
+    id: 'panda-arcade',
+    name: 'Panda Arcade',
+    image: 'assets/templates/win-pnl-41.png',
+    thumb: 'assets/templates/win-pnl-41.png',
+    text: {
+      // Black bar along the bottom (~y 1780..2020)
+      x: 1024, y: 1900, fontSize: 170,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'cyber-operative',
+    name: 'Cyber Operative',
+    image: 'assets/templates/win-pnl-42.png',
+    thumb: 'assets/templates/win-pnl-42.png',
+    text: {
+      // Slim dark strip at the bottom (~y 1860..2030)
+      x: 1024, y: 1940, fontSize: 140,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ff88', profitColor: '#00ff88', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'berserker-claws',
+    name: 'Berserker Claws',
+    image: 'assets/templates/win-pnl-43.png',
+    thumb: 'assets/templates/win-pnl-43.png',
+    text: {
+      // Tight black strip at the very bottom (~y 1900..2020)
+      x: 1024, y: 1960, fontSize: 110,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: '#000000', strokeWidth: 8,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'scarlet-trader',
+    name: 'Scarlet Trader',
+    image: 'assets/templates/win-pnl-44.png',
+    thumb: 'assets/templates/win-pnl-44.png',
+    text: {
+      // Slim black bar with red bordering top + bottom (~y 1820..2030)
+      x: 1024, y: 1925, fontSize: 140,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ffff', profitColor: '#00ff88', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'iron-trader',
+    name: 'Iron Trader',
+    image: 'assets/templates/win-pnl-45.png',
+    thumb: 'assets/templates/win-pnl-45.png',
+    text: {
+      // Slim dark strip with red border at the bottom (~y 1880..2020)
+      x: 1024, y: 1955, fontSize: 130,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'sidekick',
+    name: 'Sidekick',
+    image: 'assets/templates/win-pnl-46.png',
+    thumb: 'assets/templates/win-pnl-46.png',
+    text: {
+      // Slim dark strip at the bottom (~y 1880..2020)
+      x: 1024, y: 1955, fontSize: 130,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ffff', profitColor: '#00ff88', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'veiled-oracle',
+    name: 'Veiled Oracle',
+    image: 'assets/templates/win-pnl-47.png',
+    thumb: 'assets/templates/win-pnl-47.png',
+    text: {
+      // Solid black bar at the bottom (~y 1740..2030)
+      x: 1024, y: 1900, fontSize: 170,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ff66ff', profitColor: '#ff66ff', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'cyber-half',
+    name: 'Cyber Half',
+    image: 'assets/templates/win-pnl-48.png',
+    thumb: 'assets/templates/win-pnl-48.png',
+    text: {
+      // Slim black strip at bottom (~y 1860..2030)
+      x: 1024, y: 1945, fontSize: 140,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ffff', profitColor: '#00ff88', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'thunder-mouse',
+    name: 'Thunder Mouse',
+    image: 'assets/templates/win-pnl-49.png',
+    thumb: 'assets/templates/win-pnl-49.png',
+    text: {
+      // Black bar at the bottom (~y 1810..2030)
+      x: 1024, y: 1920, fontSize: 150,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'world-domination',
+    name: 'World Domination',
+    image: 'assets/templates/win-pnl-50.png',
+    thumb: 'assets/templates/win-pnl-50.png',
+    text: {
+      // No banner — overlay near top sky
+      x: 1024, y: 170, fontSize: 120,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ffff', profitColor: '#00ff88', lossColor: '#ff8899',
+      stroke: '#000000', strokeWidth: 14,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1700,
+    },
+  },
+  {
+    id: 'top-gun',
+    name: 'Top Gun',
+    image: 'assets/templates/win-pnl-51.png',
+    thumb: 'assets/templates/win-pnl-51.png',
+    text: {
+      // Black bar along the bottom (~y 1830..2020)
+      x: 1024, y: 1925, fontSize: 150,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'north-wall-st',
+    name: 'North of Wall St',
+    image: 'assets/templates/win-pnl-52.png',
+    thumb: 'assets/templates/win-pnl-52.png',
+    text: {
+      // No banner — overlay near top of red sky
+      x: 1024, y: 160, fontSize: 120,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: '#000000', strokeWidth: 14,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1700,
+    },
+  },
+  {
+    id: 'bear-throne',
+    name: 'Bear Throne',
+    image: 'assets/templates/win-pnl-53.png',
+    thumb: 'assets/templates/win-pnl-53.png',
+    text: {
+      // Black bar at the bottom (~y 1750..2030)
+      x: 1024, y: 1900, fontSize: 170,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ffff', profitColor: '#00ff88', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'hero-of-charts',
+    name: 'Hero of Charts',
+    image: 'assets/templates/win-pnl-54.png',
+    thumb: 'assets/templates/win-pnl-54.png',
+    text: {
+      // Yellow-bordered black banner at bottom (~y 1740..2010)
+      x: 1024, y: 1875, fontSize: 170,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1800,
+    },
+  },
+  {
+    id: 'star-pilot',
+    name: 'Star Pilot',
+    image: 'assets/templates/win-pnl-55.png',
+    thumb: 'assets/templates/win-pnl-55.png',
+    text: {
+      // Slim dark strip at bottom (~y 1880..2030)
+      x: 1024, y: 1955, fontSize: 130,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ffff', profitColor: '#00ff88', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'fan-assassin',
+    name: 'Fan Assassin',
+    image: 'assets/templates/win-pnl-56.png',
+    thumb: 'assets/templates/win-pnl-56.png',
+    text: {
+      // Slim black bar at bottom (~y 1820..2020)
+      x: 1024, y: 1925, fontSize: 150,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
+  {
+    id: 'saiyan-mode',
+    name: 'Saiyan Mode',
+    image: 'assets/templates/win-pnl-57.png',
+    thumb: 'assets/templates/win-pnl-57.png',
+    text: {
+      // Black bar at the bottom (~y 1750..2020)
+      x: 1024, y: 1890, fontSize: 170,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1800,
+    },
+  },
+  {
+    id: 'sub-zero',
+    name: 'Sub-Zero',
+    image: 'assets/templates/win-pnl-58.png',
+    thumb: 'assets/templates/win-pnl-58.png',
+    text: {
+      // Clean black banner at bottom (~y 1660..2010)
+      x: 1024, y: 1840, fontSize: 200,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ffff', profitColor: '#00ffff', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1800,
+    },
+  },
+  {
+    id: 'scorpion-trader',
+    name: 'Scorpion Trader',
+    image: 'assets/templates/win-pnl-59.png',
+    thumb: 'assets/templates/win-pnl-59.png',
+    text: {
+      // No banner — overlay near top
+      x: 1024, y: 170, fontSize: 120,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: '#000000', strokeWidth: 14,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1700,
+    },
+  },
+  {
+    id: 'cobra-trader',
+    name: 'Cobra Trader',
+    image: 'assets/templates/win-pnl-60.png',
+    thumb: 'assets/templates/win-pnl-60.png',
+    text: {
+      // Yellow-edged black bar at bottom (~y 1810..2020)
+      x: 1024, y: 1920, fontSize: 150,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1800,
+    },
+  },
+  {
+    id: 'hype-panda',
+    name: 'Hype Panda',
+    image: 'assets/templates/win-pnl-61.png',
+    thumb: 'assets/templates/win-pnl-61.png',
+    text: {
+      // Black bar at bottom (~y 1780..2030)
+      x: 1024, y: 1910, fontSize: 160,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
+    },
+  },
   // --- Simple scoreboard templates (stay at the end for users who want
   // a clean backdrop with no scene) -------------------------------------
   {
