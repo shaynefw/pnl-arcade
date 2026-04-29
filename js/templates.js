@@ -1079,6 +1079,21 @@ window.TEMPLATES = [
       prefix: '$', shadow: true, uppercase: false, maxWidth: 1850,
     },
   },
+  {
+    id: 'cake-storm',
+    name: 'Cake Storm',
+    image: 'assets/templates/win-pnl-62.png',
+    thumb: 'assets/templates/win-pnl-62.png',
+    text: {
+      // Yellow-bordered black banner at the bottom (~y 1620..2000)
+      x: 1024, y: 1820, fontSize: 200,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#ffcc00', profitColor: '#ffcc00', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1800,
+    },
+  },
   // --- Simple scoreboard templates (stay at the end for users who want
   // a clean backdrop with no scene) -------------------------------------
   {
