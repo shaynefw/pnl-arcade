@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=8" />
+  <link rel="stylesheet" href="css/style.css?v=9" />
 </head>
 <body>
   <header class="topbar">
@@ -36,9 +36,10 @@
         <li><b>Add banners (optional).</b> Tap one or more banners — numbers
             show the stack order, tap again to remove.</li>
         <li><b>Nudge the P&amp;L.</b> Use the <b>vertical slider</b> on the
-            left of the preview to move it up or down, and the
-            <b>SIZE slider</b> below to make it bigger or smaller. Hit
-            <b>RESET</b> to snap back to the template default.</li>
+            left of the preview to move it up or down, the <b>X slider</b>
+            below to slide it left or right, and the <b>SIZE slider</b> to
+            make it bigger or smaller. Hit <b>RESET</b> to snap back to
+            the template default.</li>
         <li><b>Preview updates live</b> on the canvas.</li>
         <li><b>Download PNG</b> and post it to your trading chat.</li>
       </ol>
@@ -107,6 +108,12 @@
           <div class="canvas-wrap">
             <canvas id="preview-canvas"></canvas>
           </div>
+        </div>
+        <div class="slider-row">
+          <span class="slider-cap">X</span>
+          <input type="range" id="x-slider" class="size-slider"
+                 min="0" max="100" step="1" value="50"
+                 aria-label="P&amp;L horizontal position" />
         </div>
         <div class="slider-row">
           <span class="slider-cap">SIZE</span>

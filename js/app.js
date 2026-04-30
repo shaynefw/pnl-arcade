@@ -27,6 +27,7 @@
     bannerIds: [],          // array of banner IDs, in click order
     imageCache: new Map(),  // key: src URL → HTMLImageElement
     yOffsetPct: null,       // null = use template default; otherwise 0-100
+    xOffsetPct: null,       // null = use template default; otherwise 0-100
     fontSizePct: 100,       // percentage of template's fontSize
   };
 
@@ -147,7 +148,9 @@
     ctx.textAlign = cfg.align || 'center';
     ctx.textBaseline = cfg.baseline || 'middle';
 
-    const drawX = cfg.x || W / 2;
+    const drawX = state.xOffsetPct != null
+      ? (state.xOffsetPct / 100) * W
+      : (cfg.x || W / 2);
     const drawY = state.yOffsetPct != null
       ? (state.yOffsetPct / 100) * tplH
       : (cfg.y || tplH / 2);
@@ -184,6 +187,10 @@
     if (state.yOffsetPct == null && ySlider) {
       const defaultYPct = Math.round(((cfg.y || tplH / 2) / tplH) * 100);
       ySlider.value = String(100 - defaultYPct);
+    }
+    if (state.xOffsetPct == null && xSlider) {
+      const defaultXPct = Math.round(((cfg.x || W / 2) / W) * 100);
+      xSlider.value = String(defaultXPct);
     }
   }
 
@@ -446,19 +453,24 @@
   // --- Position / size sliders -------------------------------------------
 
   const ySlider = document.getElementById('y-slider');
+  const xSlider = document.getElementById('x-slider');
   const sizeSlider = document.getElementById('size-slider');
   const sliderReset = document.getElementById('slider-reset');
 
   function resetSliders() {
     state.yOffsetPct = null;
+    state.xOffsetPct = null;
     state.fontSizePct = 100;
     const tpl = currentTemplate();
     const cfg = tpl.text || {};
     // Initialize Y slider: thumb at top = text at top → inverted mapping.
     const tplImg = state.imageCache.get(tpl.image);
     const tplH = tplImg ? tplImg.naturalHeight : 2048;
+    const tplW = tplImg ? tplImg.naturalWidth  : 2048;
     const defaultYPct = Math.round(((cfg.y || tplH / 2) / tplH) * 100);
+    const defaultXPct = Math.round(((cfg.x || tplW / 2) / tplW) * 100);
     if (ySlider) ySlider.value = String(100 - defaultYPct);
+    if (xSlider) xSlider.value = String(defaultXPct);
     if (sizeSlider) sizeSlider.value = '100';
   }
 
@@ -467,6 +479,12 @@
     // Slider value 0   = thumb at bottom = text at bottom (yOffsetPct = 100).
     ySlider.addEventListener('input', (e) => {
       state.yOffsetPct = 100 - parseInt(e.target.value, 10);
+      render();
+    });
+  }
+  if (xSlider) {
+    xSlider.addEventListener('input', (e) => {
+      state.xOffsetPct = parseInt(e.target.value, 10);
       render();
     });
   }
