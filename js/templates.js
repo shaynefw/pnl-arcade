@@ -1094,6 +1094,21 @@ window.TEMPLATES = [
       prefix: '$', shadow: true, uppercase: false, maxWidth: 1800,
     },
   },
+  {
+    id: 'ocean-liquidity',
+    name: 'Ocean Liquidity',
+    image: 'assets/templates/win-pnl-63.png',
+    thumb: 'assets/templates/win-pnl-63.png',
+    text: {
+      // Clean black banner at the bottom (~y 1660..2010)
+      x: 1024, y: 1840, fontSize: 200,
+      fontFamily: "'Press Start 2P', monospace",
+      align: 'center', baseline: 'middle',
+      color: '#00ffff', profitColor: '#00ff88', lossColor: '#ff8899',
+      stroke: null, strokeWidth: 0,
+      prefix: '$', shadow: true, uppercase: false, maxWidth: 1800,
+    },
+  },
   // --- Simple scoreboard templates (stay at the end for users who want
   // a clean backdrop with no scene) -------------------------------------
   {
