@@ -97,6 +97,12 @@ window.BANNERS = [
     image: 'assets/pnl-banners/ghostx-banner.png',
     thumb: 'assets/pnl-banners/ghostx-banner.png',
   },
+  {
+    id: 'ghosttrend',
+    name: 'GhostTrend',
+    image: 'assets/pnl-banners/GhostTrend-banner.png',
+    thumb: 'assets/pnl-banners/GhostTrend-banner.png',
+  },
 ];
 
 // --- Template registry ---------------------------------------------------
