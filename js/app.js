@@ -272,6 +272,7 @@
         updateCarouselSelectionState();
         resetSliders();
         render();
+        showGotoBanners();
         pauseThenResume();
       });
       carouselTrack.appendChild(slide);
@@ -349,6 +350,7 @@
         updateCarouselSelectionState();
         resetSliders();
         render();
+        showGotoBanners();
       });
       gallery.appendChild(btn);
     });
@@ -387,10 +389,51 @@
         else state.bannerIds.splice(idx, 1);
         refreshBannerBadges();
         render();
+        hideGotoBanners();
       });
       bannerGallery.appendChild(btn);
     });
     refreshBannerBadges();
+  }
+
+  // --- Mobile nav helpers (jump to banners / preview) --------------------
+
+  const gotoBannersBtn = document.getElementById('goto-banners');
+  const gotoPreviewBtn = document.getElementById('goto-preview');
+  const bannerField = bannerGallery && bannerGallery.closest('.field');
+  const previewField = document.querySelector('.preview-field');
+
+  function isMobileViewport() {
+    return window.matchMedia('(max-width: 859px)').matches;
+  }
+  function showGotoBanners() {
+    if (!gotoBannersBtn || !isMobileViewport()) return;
+    if (state.bannerIds.length > 0) return; // already past this step
+    gotoBannersBtn.hidden = false;
+  }
+  function hideGotoBanners() {
+    if (gotoBannersBtn) gotoBannersBtn.hidden = true;
+  }
+  if (gotoBannersBtn) {
+    gotoBannersBtn.addEventListener('click', () => {
+      const target = bannerField || bannerGallery;
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      gotoBannersBtn.hidden = true;
+    });
+  }
+  if (gotoPreviewBtn) {
+    gotoPreviewBtn.addEventListener('click', () => {
+      const target = previewField || canvas;
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+    // Auto-hide the FAB while the preview is on screen
+    if ('IntersectionObserver' in window && previewField) {
+      const io = new IntersectionObserver((entries) => {
+        const visible = entries[0] && entries[0].isIntersecting;
+        gotoPreviewBtn.classList.toggle('is-hidden', visible);
+      }, { threshold: 0.4 });
+      io.observe(previewField);
+    }
   }
 
   // --- Wiring ------------------------------------------------------------

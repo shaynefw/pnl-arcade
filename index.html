@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=10" />
+  <link rel="stylesheet" href="css/style.css?v=11" />
 </head>
 <body>
   <header class="topbar">
@@ -88,6 +88,9 @@
       <div class="field">
         <label>Pick a template</label>
         <div id="gallery" class="gallery" role="listbox" aria-label="Template gallery"></div>
+        <button id="goto-banners" class="mobile-jump" type="button" hidden>
+          Next: Pick a banner <span aria-hidden="true">↓</span>
+        </button>
       </div>
 
       <div class="field">
@@ -152,6 +155,11 @@
       </div>
     </section>
   </main>
+
+  <button id="goto-preview" class="mobile-fab" type="button"
+          aria-label="Jump to preview">
+    See preview <span aria-hidden="true">↧</span>
+  </button>
 
   <div id="download-toast" class="toast" role="status" aria-live="polite" hidden>
     <span class="toast-icon" aria-hidden="true">▼</span>
