@@ -410,6 +410,10 @@
     if (!gotoBannersBtn || !isMobileViewport()) return;
     if (state.bannerIds.length > 0) return; // already past this step
     gotoBannersBtn.hidden = false;
+    // Nudge the page just enough that the pill is visible to the user.
+    requestAnimationFrame(() => {
+      gotoBannersBtn.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    });
   }
   function hideGotoBanners() {
     if (gotoBannersBtn) gotoBannersBtn.hidden = true;
