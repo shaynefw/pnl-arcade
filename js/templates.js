@@ -88,8 +88,8 @@ window.BANNERS = [
   {
     id: 'ghosteye',
     name: 'GhostEye',
-    image: 'assets/pnl-banners/ghosteye-banner.png',
-    thumb: 'assets/pnl-banners/ghosteye-banner.png',
+    image: 'assets/pnl-banners/ghosteyeV2-banner.png',
+    thumb: 'assets/pnl-banners/ghosteyeV2-banner.png',
   },
   {
     id: 'ghostx',
