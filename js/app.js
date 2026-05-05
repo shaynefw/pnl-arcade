@@ -29,6 +29,7 @@
     yOffsetPct: null,       // null = use template default; otherwise 0-100
     xOffsetPct: null,       // null = use template default; otherwise 0-100
     fontSizePct: 100,       // percentage of template's fontSize
+    colorOverride: null,    // null = use template profit/loss color; else hex string
   };
 
   // --- Helpers -----------------------------------------------------------
@@ -133,9 +134,10 @@
     // 2. P&L text overlay
     const cfg = tpl.text || {};
     const text = buildPnlText(cfg);
-    const baseColor = state.sign === '-'
+    const templateColor = state.sign === '-'
       ? (cfg.lossColor || cfg.color || '#ff3355')
       : (cfg.profitColor || cfg.color || '#ffffff');
+    const baseColor = state.colorOverride || templateColor;
 
     // Apply user slider overrides (position + font size).
     const sizeMult = (state.fontSizePct || 100) / 100;
@@ -461,6 +463,7 @@
     state.yOffsetPct = null;
     state.xOffsetPct = null;
     state.fontSizePct = 100;
+    state.colorOverride = null;
     const tpl = currentTemplate();
     const cfg = tpl.text || {};
     // Initialize Y slider: thumb at top = text at top → inverted mapping.
@@ -472,6 +475,29 @@
     if (ySlider) ySlider.value = String(100 - defaultYPct);
     if (xSlider) xSlider.value = String(defaultXPct);
     if (sizeSlider) sizeSlider.value = '100';
+    syncPaletteSelection();
+  }
+
+  // --- Color palette ----------------------------------------------------
+  const palette = document.getElementById('color-palette');
+  function syncPaletteSelection() {
+    if (!palette) return;
+    palette.querySelectorAll('.swatch').forEach(b => {
+      const c = b.dataset.color || '';
+      const isActive = (state.colorOverride || '') === c;
+      b.classList.toggle('is-active', isActive);
+    });
+  }
+  if (palette) {
+    palette.addEventListener('click', (e) => {
+      const btn = e.target.closest('.swatch');
+      if (!btn) return;
+      const c = btn.dataset.color || '';
+      state.colorOverride = c || null;
+      syncPaletteSelection();
+      render();
+    });
+    syncPaletteSelection();
   }
 
   if (ySlider) {

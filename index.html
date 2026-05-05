@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=9" />
+  <link rel="stylesheet" href="css/style.css?v=10" />
 </head>
 <body>
   <header class="topbar">
@@ -40,6 +40,9 @@
             below to slide it left or right, and the <b>SIZE slider</b> to
             make it bigger or smaller. Hit <b>RESET</b> to snap back to
             the template default.</li>
+        <li><b>Pick a color.</b> Tap a <b>COLOR</b> swatch to recolor the
+            P&amp;L number. The <b>A</b> swatch keeps the template's tuned
+            color.</li>
         <li><b>Preview updates live</b> on the canvas.</li>
         <li><b>Download PNG</b> and post it to your trading chat.</li>
       </ol>
@@ -122,6 +125,25 @@
                  aria-label="P&amp;L font size" />
           <button type="button" id="slider-reset" class="slider-reset"
                   aria-label="Reset position and size">RESET</button>
+        </div>
+        <div class="slider-row palette-row" role="group" aria-label="P&amp;L color">
+          <span class="slider-cap">COLOR</span>
+          <div id="color-palette" class="color-palette">
+            <button type="button" class="swatch is-default" data-color=""
+                    aria-label="Use template default color" title="Default">A</button>
+            <button type="button" class="swatch" data-color="#00ff88"
+                    style="--swatch:#00ff88" aria-label="Green" title="Green"></button>
+            <button type="button" class="swatch" data-color="#00ffff"
+                    style="--swatch:#00ffff" aria-label="Cyan" title="Cyan"></button>
+            <button type="button" class="swatch" data-color="#ffcc00"
+                    style="--swatch:#ffcc00" aria-label="Amber" title="Amber"></button>
+            <button type="button" class="swatch" data-color="#ff44bb"
+                    style="--swatch:#ff44bb" aria-label="Magenta" title="Magenta"></button>
+            <button type="button" class="swatch" data-color="#ff3355"
+                    style="--swatch:#ff3355" aria-label="Red" title="Red"></button>
+            <button type="button" class="swatch" data-color="#ffffff"
+                    style="--swatch:#ffffff" aria-label="White" title="White"></button>
+          </div>
         </div>
       </div>
 
